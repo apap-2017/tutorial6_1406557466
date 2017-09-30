@@ -48,5 +48,11 @@ public class StudentServiceDatabase implements StudentService
     	 StudentModel student = studentMapper.selectStudent(npm);
     	 studentMapper.deleteStudent(student);
     }
+    
+    @Override
+    public void updateStudent (StudentModel student) {
+    	log.info("student "+student+" updated");
+    	studentMapper.updateStudent(student);
+    }
 
 }
