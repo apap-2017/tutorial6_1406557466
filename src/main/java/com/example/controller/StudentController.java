@@ -32,7 +32,7 @@ public class StudentController {
 	public String addSubmit(@RequestParam(value = "npm", required = false) String npm,
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "gpa", required = false) double gpa) {
-		StudentModel student = new StudentModel(npm, name, gpa);
+		StudentModel student = new StudentModel(npm, name, gpa, null);
 		studentDAO.addStudent(student);
 
 		return "success-add";
@@ -82,7 +82,7 @@ public class StudentController {
 			return "not-found";
 		}
 	}
-	
+
 	@RequestMapping("/student/update/{npm}")
 	public String update(Model model, @PathVariable(value = "npm") String npm) {
 		StudentModel student = studentDAO.selectStudent(npm);
@@ -96,11 +96,9 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/student/update/submit", method = RequestMethod.POST)
-	public String updateSubmit(
-			@RequestParam(value = "npm", required = false) String npm,
+	public String updateSubmit(@RequestParam(value = "npm", required = false) String npm,
 			@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "gpa", required = false) double gpa)
-	{
+			@RequestParam(value = "gpa", required = false) double gpa) {
 		StudentModel student = studentDAO.selectStudent(npm);
 		student.setName(name);
 		student.setGpa(gpa);
